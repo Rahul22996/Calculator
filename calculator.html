@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            background: radial-gradient(circle, rgba(83,82,91,0.9976365546218487) 0%, rgba(37,38,43,1) 50%, rgba(9,10,19,1) 100%);
+        }
+        .main {
+            margin: auto;
+            width: 400px;
+            padding: 15px;
+            /* border: 1px solid rgba(0, 0, 0, 0.8); */
+            background-color: #1C1C1C;
+            box-shadow: 0px 15px 0px 0px;
+            border-radius: 10px;
+        }
+
+        #display {
+            width: 95%;
+            height: 50px;
+            background-color: white;
+            font-weight: 600;
+            margin: 5px;
+            outline: 3px solid black;
+            font-size: 20px;
+            text-align: right;
+        }
+
+        button {
+            width: calc(24.2% - 12px);
+            height: 50px;
+            margin: 6px;
+            background-color: #727186;
+            color: black;
+            box-shadow: 0px 5px 0px ;
+            font-size: 20px;
+            border: none;
+        }
+        .row{
+            display: flex;
+            justify-content: center;
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="row">
+        <h1>CALCULATOR</h1>
+    </div>
+    <div class="main">
+        <input id="display" value="">
+        <div class="row">
+            <button>CE</button>
+            <button onclick="num(this.innerHTML)">C</button>
+            <button onclick="back()">B</button>
+            <button onclick="opr(this.innerHTML)">/</button>
+        </div>
+        <div class="row">
+            <button onclick="num(this.innerHTML)">7</button>
+            <button onclick="num(this.innerHTML)">8</button>
+            <button onclick="num(this.innerHTML)">9</button>
+            <button onclick="opr(this.innerHTML)">*</button>
+        </div>
+        <div class="row">
+            <button onclick="num(this.innerHTML)">4</button>
+            <button onclick="num(this.innerHTML)">5</button>
+            <button onclick="num(this.innerHTML)">6</button>
+            <button onclick="opr(this.innerHTML)">-</button>
+        </div>
+        <div class="row">
+            <button onclick="num(this.innerHTML)">1</button>
+            <button onclick="num(this.innerHTML)">2</button>
+            <button onclick="num(this.innerHTML)">3</button>
+            <button onclick="opr(this.innerHTML)">+</button>
+        </div>
+        <div class="row">
+            <button onclick="num(this.innerHTML)">0</button>
+            <button onclick="dot()">.</button>
+            <button onclick="opr(this.innerHTML)">%</button>
+            <button onclick="equal()">=</button>
+        </div>
+    </div>
+
+    <script>
+        let a, b, sign = "", cnt = 0;
+
+        function num(n) {
+            document.getElementById("display").value += n;
+            if (n == "C") {
+                document.getElementById("display").value = ""
+            }
+        }
+
+        function dot() {
+            if (cnt == 0) {
+                document.getElementById("display").value += "."
+                cnt++;
+            }
+        }
+
+        function opr(s) {
+            sign = s;
+            cnt = 0;
+            a = document.getElementById("display").value;
+            document.getElementById("display").value = ""
+        }
+
+        function equal() {
+            b = document.getElementById("display").value;
+
+            if (sign === "+") {
+                b = Number(a) + Number(b);
+            }
+            if (sign === "-") {
+                b = Number(a) - Number(b);
+            }
+            if (sign === "*") {
+                b = Number(a) * Number(b);
+            }
+            if (sign === "/") {
+                b = Number(a) / Number(b);
+            }
+            if (sign === "%") {
+                b = (Number(a) * Number(b)) / 100;
+            }
+            document.getElementById("display").value = b;
+        }
+
+        function back() {
+            a = document.getElementById("display").value;
+            document.getElementById("display").value = a.substring(0,(a.length - 1));
+            cnt=0
+        }
+
+    </script>
+</body>
+
+</html>
